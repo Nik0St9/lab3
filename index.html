@@ -6,14 +6,35 @@
     <h1>Задача 1</h1>
     <input type="text" id="nameInput" placeholder="Введите имя">
     <button id="greetButton">Приветствие</button>
-    <input type="text" id="resultInput">
+    <input type="text" id="resultNameInput">
 
     <script>
         document.getElementById("greetButton").addEventListener('click', () => {
             let text = document.getElementById('nameInput').value;
-            let output = document.getElementById('resultInput');
+            let output = document.getElementById('resultNameInput');
             text == '' ? output.value = 'Введите имя' : output.value = 'Привет, "' + text + '"!';
         })
+    </script>
+
+    <hr>
+    <h1>Задача 2</h1>
+    <input type="text" id="costInput" placeholder="Введите цену">
+    <input type="text" id="discountInput" placeholder="Введите % скидки">
+    <button id="discountButton">Посчитать</button>
+    <input type="text" id="ResultCostInput">
+
+    <script>
+        document.getElementById('discountButton').addEventListener('click', () => {
+            let cost = parseFloat(document.getElementById('costInput').value);
+            let discount = parseFloat(document.getElementById('discountInput').value) * 0.01;
+            let output = document.getElementById('ResultCostInput');
+
+            if (isNaN(cost) || isNaN(discount)) {
+                output.value = 'Некорректный ввод!';
+            } else {
+                output.value = `Итоговая цена: ${cost - (cost * discount)}₽`;
+            }
+        });
     </script>
 </body>
 
