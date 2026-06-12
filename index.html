@@ -55,10 +55,10 @@
                     case (age < 18):
                         output.value = "Доступ запрещён";
                         break;
-                    case (age >=18 && age < 59):
+                    case (age >= 18 && age < 59):
                         output.value = "Доступ разрешён";
                         break;
-                    case (age >=60):
+                    case (age >= 60):
                         output.value = "Льготная категория";
                         break;
                 }
@@ -66,6 +66,36 @@
         })
     </script>
 
+    <hr>
+    <h1>Задача 5</h1>
+    <input type="text" id="productCostInput" placeholder="Введите цену">
+    <button id="checkProductCostButton">Узнать</button>
+    <input type="text" id="resultProductCostInput">
+
+    <script>
+        document.getElementById("checkProductCostButton").addEventListener('click', () => {
+            let cost = parseFloat(document.getElementById("productCostInput").value);
+            let output = document.getElementById('resultProductCostInput');
+
+            switch (true) {
+                case (cost < 0):
+                    output.value = "Неккоректное значение!"
+                    break;
+                case (cost == 0):
+                    output.value = "Бесплатно"
+                    break;
+                case (cost > 0 && cost < 1000):
+                    output.value = "Дешевый товар"
+                    break;
+                case (cost >= 1000 && cost < 10000):
+                    output.value = "Обычный товар"
+                    break;
+                case (cost >= 10000):
+                    output.value = "Дорогой товар"
+                    break;
+            }
+        })
+    </script>
 </body>
 
 </html>
