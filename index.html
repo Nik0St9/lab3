@@ -2,6 +2,20 @@
 
 <html>
 
+<head>
+    <style>
+        .on {
+            background-color: rgb(26, 255, 95);
+            color: black;
+        }
+
+        .off {
+            background-color: rgb(255, 68, 26);
+            color: rgb(255, 255, 255);
+        }
+    </style>
+</head>
+
 <body>
     <h1>Задача 1</h1>
     <input type="text" id="nameInput" placeholder="Введите имя">
@@ -74,27 +88,52 @@
 
     <script>
         document.getElementById("checkProductCostButton").addEventListener('click', () => {
-            let cost = parseFloat(document.getElementById("productCostInput").value);
-            let output = document.getElementById('resultProductCostInput');
+            let cost = parseFloat(document.getElementById("productCostInput").value)
+            let output = document.getElementById('resultProductCostInput')
 
             switch (true) {
                 case (cost < 0):
                     output.value = "Неккоректное значение!"
-                    break;
+                    break
                 case (cost == 0):
                     output.value = "Бесплатно"
-                    break;
+                    break
                 case (cost > 0 && cost < 1000):
                     output.value = "Дешевый товар"
-                    break;
+                    break
                 case (cost >= 1000 && cost < 10000):
                     output.value = "Обычный товар"
-                    break;
+                    break
                 case (cost >= 10000):
                     output.value = "Дорогой товар"
-                    break;
+                    break
             }
         })
+    </script>
+
+    <hr>
+    <h1>Задача 6</h1>
+    <button id="StateButton">Переключить</button>
+    <input type="text" id="stateInput" Class="off" value="Выключено">
+
+    <script>
+        let isOn = false;
+        let button = document.getElementById('StateButton')
+        let box = document.getElementById('stateInput')
+
+        button.addEventListener('click', () => {
+            isOn = !isOn
+
+            if (isOn) {
+                box.value = "Включено"
+                box.className = 'on'
+            } else {
+                box.value = "Выключено"
+                box.className = 'off'
+            }
+
+        })
+
     </script>
 </body>
 
