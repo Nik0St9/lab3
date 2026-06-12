@@ -36,6 +36,36 @@
             }
         });
     </script>
+
+    <hr>
+    <h1>Задача 3</h1>
+    <input type="number" id="ageInput" placeholder="Введите возраст">
+    <button id="checkAgeButton">Проверить</button>
+    <input type="text" id="resultAgeInput">
+
+    <script>
+        document.getElementById('checkAgeButton').addEventListener('click', () => {
+            let age = parseInt(document.getElementById('ageInput').value);
+            let output = document.getElementById('resultAgeInput');
+
+            if (isNaN(age) || age < 0) {
+                output.value = "Неккоректный ввод!";
+            } else {
+                switch (true) {
+                    case (age < 18):
+                        output.value = "Доступ запрещён";
+                        break;
+                    case (age >=18 && age < 59):
+                        output.value = "Доступ разрешён";
+                        break;
+                    case (age >=60):
+                        output.value = "Льготная категория";
+                        break;
+                }
+            }
+        })
+    </script>
+
 </body>
 
 </html>
