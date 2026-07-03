@@ -8,32 +8,68 @@
     <input type="number" placeholder="Введите число" id="inputNumber" value="4">
     <button type="button" id="execButton">Выполнить</button>
 
+    <hr>
     <section id="productTable">
 
     </section>
+    <hr>
+
+    <hr>
+    <section>
+        <h1>Список чисел:</h1>
+        <p id="numbers"><strong>Числа: </strong></p>
+        <p id="summ"></p>
+        <p id="medium"></p>
+    </section>
+    <hr>
 
     <script>
+        let numbers = []
+        let numbersOut = document.getElementById('numbers')
+        let summOut = document.getElementById('summ')
+        let mediumOut = document.getElementById('medium')
+
         document.getElementById('execButton').addEventListener('click', () => {
             let number = parseInt(document.getElementById('inputNumber').value)
-            Display(number)
-
-        })
-
-        function Display(number) {
-            let out = document.getElementById('productTable')
 
             if (isNaN(number)) {
-                out.innerHTML = "Введите корректное число!"
+                alert("Введите корректное число!")
                 return
             }
 
-            out.innerHTML = `<div class="gridItem">Таблица умножения:</div>`
+            numbers.push(number)
+            numbersOut.innerHTML += `${number} `
+            summOut.innerHTML = `<strong>Сумма: </strong>${Summ(numbers)} `
+            mediumOut.innerHTML = `<strong>Среднее: </strong>${Medium(numbers)} `
+            Display(number)
+        })
 
+        function Display(number) {
+            let productOut = document.getElementById('productTable')
+
+            productOut.innerHTML = `<div class="gridItem">Таблица умножения:</div>`
 
             for (let i = 1; i < 6; i++) {
-                out.innerHTML += `<div class="griItem"> ${number} * ${i} = ${number * i} `
-                out.innerHTML += `${number} * ${i + 5} = ${number * (i + 5)}</div>`
+                productOut.innerHTML += `<div class="griItem"> ${number} * ${i} = ${number * i} `
+                productOut.innerHTML += `${number} * ${i + 5} = ${number * (i + 5)}</div>`
             }
+        }
+
+        function Medium(numbers) {
+            let cnt = 0
+            let i = 0
+            for (i; i < numbers.length; i++) {
+                cnt += parseInt(numbers[i])
+            }
+            return cnt / i
+        }
+
+        function Summ(numbers) {
+            let cnt = 0
+            for (let i = 0; i < numbers.length; i++) {
+                cnt += parseInt(numbers[i])
+            }
+            return cnt
         }
     </script>
 </body>
