@@ -1,0 +1,20 @@
+<html>
+
+<body>
+    <h1>См. консоль</h1>
+
+    <Script>
+        let global = "Im global!"
+
+        function func() {
+            let local = "Im local!"
+            alert(local)
+        }
+
+        func() // Вызов 'Im local'
+        alert(global) // Вызов 'Im global'
+        alert(local) // Вывода не будет, в консоли: "local is not defined"
+    </Script>
+</body>
+
+</html>
