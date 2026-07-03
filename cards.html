@@ -5,6 +5,25 @@
 </head>
 
 <body id="cards">
+    <header>
+        <h2>Меню: </h2>
+        <nav id="head">
+        </nav>
+        <script>
+            const menu = ['Главная', 'Каталог', 'О нас', 'Контакты'];
+            Nav(menu)
+
+            function Nav(items) {
+                let head = document.getElementById('head')
+                head.innerHTML += `<ul>`
+                for (let i = 0; i < items.length; i++) {
+                    head.innerHTML += `<li><a href="">${items[i]}</a></li>`
+                }
+                head.innerHTML += `</ul>`
+            }
+        </script>
+    </header>
+
     <h1>Товары:</h1>
     <script>
         const products = ['Ноутбук', 'Мышь', 'Клавиатура', 'Монитор']
