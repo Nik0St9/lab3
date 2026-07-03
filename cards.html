@@ -1,0 +1,28 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body id="cards">
+    <h1>Товары:</h1>
+    <script>
+        const products = ['Ноутбук', 'Мышь', 'Клавиатура', 'Монитор']
+        let cards = document.getElementById('cards')
+
+        for (let i = 0; i < products.length; i++) {
+            CreateCard(products[i])
+        }
+
+        function CreateCard(item) {
+            let random = Math.floor(Math.random() * 10000)
+            cards.innerHTML += `
+            <div class="Item">
+                <h2>${item}</h2>
+                <p>Цена: ${random}₽<p>
+            </div>`
+        }
+    </script>
+</body>
+
+</html>
