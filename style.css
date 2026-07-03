@@ -34,3 +34,24 @@
         text-align: right;
     }
 }
+
+#productTable{
+    display: grid;
+    grid-template-rows: repeat(6, 48px);
+    grid-template-columns: repeat(2, 1fr);
+
+    margin-top: 10px;
+    gap: 10px;
+    font-size: 32px;
+
+    .gridItem{
+        text-align: center;
+    }
+
+    .gridItem:first-child{
+        grid-column: 1 / -1;
+
+        text-align: left;
+        font-size: larger;
+    }
+}

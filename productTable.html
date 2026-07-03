@@ -1,0 +1,41 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <input type="number" placeholder="Введите число" id="inputNumber" value="4">
+    <button type="button" id="execButton">Выполнить</button>
+
+    <section id="productTable">
+
+    </section>
+
+    <script>
+        document.getElementById('execButton').addEventListener('click', () => {
+            let number = parseInt(document.getElementById('inputNumber').value)
+            Display(number)
+
+        })
+
+        function Display(number) {
+            let out = document.getElementById('productTable')
+
+            if (isNaN(number)) {
+                out.innerHTML = "Введите корректное число!"
+                return
+            }
+
+            out.innerHTML = `<div class="gridItem">Таблица умножения:</div>`
+
+
+            for (let i = 1; i < 6; i++) {
+                out.innerHTML += `<div class="griItem"> ${number} * ${i} = ${number * i} `
+                out.innerHTML += `${number} * ${i + 5} = ${number * (i + 5)}</div>`
+            }
+        }
+    </script>
+</body>
+
+</html>
