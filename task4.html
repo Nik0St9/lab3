@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <form action="" id="registryForm">
+        <fieldset style="border-radius: 10px; border-color: red;">
+            <legend style="color: red;">Регистрация:</legend>
+            <p>
+                <label>Имя:</label>
+                <input type="text" name="nameInput">
+            </p>
+            <p>
+                <label>E-mail:</label>
+                <input type="email" name="emailInput">
+            </p>
+            <p>
+                <label>Пароль:</label>
+                <input type="password" name="passwordInput">
+            </p>
+            <p>
+                <button name="submitButton">Отправить</button>
+                <input type="reset" value="Очистить">
+            </p>
+
+            <script>
+                let form = document.getElementById('registryForm');
+
+                form.submitButton.addEventListener('click', () => {
+                    event.preventDefault();
+                    let name = form.nameInput.value;
+                    let email = form.emailInput.value;
+                    let password = form.passwordInput.value;
+
+                    if (name == "" || email == "" || password == "")
+                        alert("Остались пустые поля!");
+                    else {
+                        alert(PasswordValidator(password))
+                        return
+                    }
+                })
+
+                function PasswordValidator(psw) {
+                    if (psw.length < 7)
+                        return "Пароль слишком короткий!"
+                    else if (!/[0-9]/.test(psw))
+                        return "Пароль должен содержать хотя бы одну цифру!"
+                    else if (!/[a-zA-Z]/.test(psw))
+                        return "Пароль должен содержать хотя бы одну букву!"
+                    else
+                        return "Нормальный пароль"
+                }
+            </script>
+        </fieldset>
+    </form>
+</body>
+
+</html>
