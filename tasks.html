@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h2>Список задач</h2>
+
+    <button id="allBtn">Все</button>
+    <button id="completedBtn">Выполненные</button>
+    <button id="notCompletedBtn">Невыполненные</button>
+
+    <ul id="taskList"></ul>
+
+    <script>
+        const tasks = [
+            { id: 1, title: "Сделать HTML", completed: true },
+            { id: 2, title: "Сделать CSS", completed: false },
+            { id: 3, title: "Сделать JS", completed: false }
+        ]
+
+        const taskList = document.getElementById("taskList")
+
+        function renderTasks(arr) {
+            taskList.innerHTML = ""
+
+            arr.forEach(task => {
+                const li = document.createElement("li")
+                li.textContent = task.title
+                taskList.appendChild(li)
+            })
+        }
+
+        document.getElementById("allBtn").addEventListener("click", () => {
+            renderTasks(tasks)
+        })
+
+        document.getElementById("completedBtn").addEventListener("click", () => {
+            const completedTasks = tasks.filter(task => task.completed)
+            renderTasks(completedTasks)
+        })
+
+        document.getElementById("notCompletedBtn").addEventListener("click", () => {
+            const notCompletedTasks = tasks.filter(task => !task.completed)
+            renderTasks(notCompletedTasks)
+        })
+
+        renderTasks(tasks)
+    </script>
+
+</body>
+
+</html>
