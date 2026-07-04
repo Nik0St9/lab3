@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h2>Цены со скидкой 10%</h2>
+    <ul id="list"></ul>
+
+    <script>
+        const prices = [500, 1200, 3000, 700]
+        const discountPrices = prices.map(price => price * 0.9)
+        const priceStrings = discountPrices.map(price => `Цена товара: ${price} ₽`)
+        const list = document.getElementById("list")
+
+        priceStrings.forEach(text => {
+            const li = document.createElement("li");
+            li.textContent = text;
+            list.appendChild(li);
+        });
+    </script>
+
+</body>
+
+</html>
