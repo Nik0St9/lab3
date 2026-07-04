@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h2>Корзина</h2>
+
+    <ul id="cartList"></ul>
+
+    <div id="summary"></div>
+
+    <script>
+        const cart = [
+            { title: "Мышь", price: 1000, count: 2 },
+            { title: "Клавиатура", price: 3000, count: 1 },
+            { title: "Монитор", price: 15000, count: 1 }
+        ]
+
+        const cartList = document.getElementById("cartList")
+        const summary = document.getElementById("summary")
+
+        function renderCart() {
+            cartList.innerHTML = ""
+
+            cart.forEach(item => {
+                const li = document.createElement("li")
+                li.textContent = `${item.title} — ${item.price} ₽ x ${item.count}`
+                cartList.appendChild(li)
+            })
+        }
+
+        function getTotalPrice() {
+            let total = 0
+
+            cart.forEach(item => {
+                total += item.price * item.count
+            })
+
+            return total
+        }
+
+        function getTotalCount() {
+            let total = 0
+
+            cart.forEach(item => {
+                total += item.count
+            })
+
+            return total
+        }
+
+        function getMostExpensive() {
+            let expensive = cart[0]
+
+            cart.forEach(item => {
+                if (item.price > expensive.price) {
+                    expensive = item
+                }
+            })
+
+            return expensive
+        }
+
+        renderCart()
+
+        const expensive = getMostExpensive()
+
+        summary.innerHTML = `
+            <p><strong>Общая сумма:</strong> ${getTotalPrice()} ₽</p>
+            <p><strong>Количество товаров:</strong> ${getTotalCount()}</p>
+            <p><strong>Самый дорогой товар:</strong> ${expensive.title} (${expensive.price} ₽)</p>
+        `
+    </script>
+
+</body>
+
+</html>
