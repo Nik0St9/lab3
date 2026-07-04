@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h2>Поиск пользователя по ID</h2>
+
+    <input type="number" id="userId" placeholder="Введите ID">
+    <button id="findBtn">Найти</button>
+
+    <div id="result"></div>
+
+    <script>
+        const users = [
+            { id: 1, name: "Анна" },
+            { id: 2, name: "Иван" },
+            { id: 3, name: "Олег" }
+        ];
+
+        const input = document.getElementById("userId")
+        const button = document.getElementById("findBtn")
+        const result = document.getElementById("result")
+
+        button.addEventListener("click", () => {
+            const id = Number(input.value)
+
+            const user = users.find(item => item.id === id)
+
+            if (user) {
+                result.textContent = "Пользователь: " + user.name
+                result.style.color = "green"
+            } else {
+                result.textContent = "Ошибка: пользователь не найден"
+                result.style.color = "red"
+            }
+        })
+    </script>
+
+</body>
+
+</html>
