@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Фильтрация товаров</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <input type="text" placeholder="Введите название..." id="searchInput">
+    <button id="findBtn">Найти</button>
+    <hr>
+    <section id="resultField"></section>
+
+    <script>
+        const products = ['Ноутбук', 'Мышь', 'Клавиатура', 'Монитор']
+        const searchInput = document.getElementById('searchInput')
+        const findBtn = document.getElementById('findBtn')
+        const resultField = document.getElementById('resultField')
+
+        function createCard(item) {
+            const price = Math.floor(Math.random() * 10000)
+            return `<div class="Item"><h2>${item}</h2><p>Цена: ${price}₽</p></div>`
+        }
+
+        function render(items) {
+            if (items.length === 0) {
+                resultField.innerHTML = '<div class="no-results">Ничего не найдено</div>'
+            } else {
+                resultField.innerHTML = items.map(createCard).join('')
+            }
+        }
+
+        render(products);
+
+        findBtn.addEventListener('click', function () {
+            const query = searchInput.value.trim().toLowerCase()
+
+            if (query === '') {
+                render(products)
+            } else {
+                const filtered = products.filter(function (product) {
+                    return product.toLowerCase().includes(query)
+                });
+                render(filtered);
+            }
+        })
+
+
+    </script>
+
+</body>
+
+</html>
