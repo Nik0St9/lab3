@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h2>Список товаров</h2>
+
+    <button id="originalBtn">Исходный список</button>
+    <button id="ascBtn">По возрастанию цены</button>
+    <button id="descBtn">По убыванию цены</button>
+
+    <ul id="productList"></ul>
+
+    <script>
+        const products = [
+            { title: "Мышь", price: 1000 },
+            { title: "Клавиатура", price: 3000 },
+            { title: "Монитор", price: 15000 },
+            { title: "Наушники", price: 5000 }
+        ]
+
+        const productList = document.getElementById("productList")
+
+        function renderProducts(arr) {
+            productList.innerHTML = ""
+
+            arr.forEach(product => {
+                const li = document.createElement("li")
+                li.textContent = `${product.title} — ${product.price}₽`
+                productList.appendChild(li)
+            })
+        }
+
+        document.getElementById("originalBtn").addEventListener("click", () => {
+            renderProducts(products)
+        })
+
+        document.getElementById("ascBtn").addEventListener("click", () => {
+            const sorted = [...products].sort((a, b) => a.price - b.price)
+            renderProducts(sorted)
+        })
+
+        document.getElementById("descBtn").addEventListener("click", () => {
+            const sorted = [...products].sort((a, b) => b.price - a.price)
+            renderProducts(sorted)
+        })
+
+        renderProducts(products)
+    </script>
+
+</body>
+
+</html>
