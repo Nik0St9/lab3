@@ -18,6 +18,10 @@
     <h2>Деструктуризация объекта</h2>
     <div id="destruct"></div>
 
+    <hr>
+    <h2>Заказ</h2>
+    <div id="orderInfo"></div>
+
     <script>
         const users = [
             {
@@ -58,9 +62,26 @@
                 storage: "512 GB SSD"
             }
         }
+        const order = {
+            number: "A-1001",
+            date: "2026-05-31",
+            client: {
+                name: "Иван Петров",
+                email: "ivan@example.com"
+            },
+            items: [
+                { title: "Мышь", price: 1000, count: 2 },
+                { title: "Клавиатура", price: 3000, count: 1 }
+            ]
+        }
 
         const profile = document.getElementById("profile")
         const productCard = document.getElementById("productCard")
+        const usersBlock = document.getElementById("users")
+        const orderInfo = document.getElementById("orderInfo")
+
+        const { name, email, role } = user
+        const destruct = document.getElementById("destruct")
 
         profile.innerHTML = `
             <div style="border:1px solid black; padding:0 15px; width:250px; margin-bottom:20px;">
@@ -84,8 +105,6 @@
                 </ul>
             </div>`
 
-        const usersBlock = document.getElementById("users")
-
         users.forEach(user => {
             usersBlock.innerHTML += `
             <div style="border:1px solid black; padding:0 15px; width:250px; margin-bottom:15px; display:inline-block">
@@ -97,15 +116,45 @@
             </div>`
         })
 
-        const { name, email, role } = user
-        const destruct = document.getElementById("destruct")
-
         destruct.innerHTML = `
-        <div style="border:1px solid black; padding:0 15px; width:250px;">
-            <h3>${name}</h3>
-            <p><b>Email:</b> ${email}</p>
-            <p><b>Роль:</b> ${role}</p>
-        </div>`
+            <div style="border:1px solid black; padding:0 15px; width:250px;">
+                <h3>${name}</h3>
+                <p><b>Email:</b> ${email}</p>
+                <p><b>Роль:</b> ${role}</p>
+            </div>`
+
+        let total = 0
+        orderInfo.innerHTML = `
+            <p><b>Номер заказа:</b> ${order.number}</p>
+            <p><b>Дата:</b> ${order.date}</p>
+            <p><b>Клиент:</b> ${order.client.name}</p>
+            <p><b>Email:</b> ${order.client.email}</p>
+
+            <table border="1" cellpadding="5">
+                <tr>
+                    <th>Товар</th>
+                    <th>Цена</th>
+                    <th>Количество</th>
+                    <th>Сумма</th>
+                </tr>
+            </table>`
+
+        const table = orderInfo.querySelector("table")
+
+        order.items.forEach(item => {
+            const sum = item.price * item.count
+            total += sum
+
+            table.innerHTML += `
+            <tr>
+                <td>${item.title}</td>
+                <td>${item.price} ₽</td>
+                <td>${item.count}</td>
+                <td>${sum} ₽</td>
+            </tr>`
+        })
+
+        orderInfo.innerHTML += `<h3>Итоговая сумма: ${total} ₽</h3>`
     </script>
 
 </body>
