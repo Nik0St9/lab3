@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h2>Подготовленные товары</h2>
+    <div id="products"></div>
+
+    <script>
+        const products = [
+            { title: "Мышь", price: 1000, category: "Периферия" },
+            { title: "Монитор", price: 15000, category: "Техника" }
+        ]
+
+        const newProducts = products.map(product => ({
+            title: product.title,
+            price: `${product.price} ₽`,
+            category: `Категория: ${product.category}`,
+            description: `${product.title} доступен к покупке`
+        }))
+
+        const productsBlock = document.getElementById("products")
+
+        newProducts.forEach(product => {
+            productsBlock.innerHTML += `
+                <div style="border:1px solid black; padding:0 15px; width:250px; margin-bottom:15px; display:inline-block;">
+                    <h3>${product.title}</h3>
+                    <p>${product.price}</p>
+                    <p>${product.category}</p>
+                    <p>${product.description}</p>
+                </div>`
+        })
+    </script>
+
+</body>
+
+</html>
