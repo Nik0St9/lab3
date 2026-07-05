@@ -6,29 +6,61 @@
     <h2>Подготовленные товары</h2>
     <div id="products"></div>
 
+    <hr>
+    <h2>Каталог по категориям</h2>
+    <div id="catalog"></div>
+
     <script>
         const products = [
             { title: "Мышь", price: 1000, category: "Периферия" },
             { title: "Монитор", price: 15000, category: "Техника" }
+        ]
+        const categories = [
+            "Периферия",
+            "Техника",
+            "Игры"
         ]
 
         const newProducts = products.map(product => ({
             title: product.title,
             price: `${product.price} ₽`,
             category: `Категория: ${product.category}`,
-            description: `${product.title} доступен к покупке`
+            description: `Товар "${product.title}" доступен к покупке`
         }))
 
         const productsBlock = document.getElementById("products")
 
         newProducts.forEach(product => {
             productsBlock.innerHTML += `
-                <div style="border:1px solid black; padding:0 15px; width:250px; margin-bottom:15px; display:inline-block;">
+                <div style="border:1px solid black; padding:0 15px; width:300px; margin-bottom:15px; display:inline-block;">
                     <h3>${product.title}</h3>
                     <p>${product.price}</p>
                     <p>${product.category}</p>
                     <p>${product.description}</p>
                 </div>`
+        })
+
+        const catalog = document.getElementById("catalog")
+
+        categories.forEach(category => {
+
+            catalog.innerHTML += `<h3>${category}</h3>`
+
+            const categoryProducts = products.filter(product => {
+                return product.category === category
+            })
+
+            if (categoryProducts.length === 0) {
+                catalog.innerHTML += `<p>Товаров нет.</p>`
+            } else {
+                categoryProducts.forEach(product => {
+                    catalog.innerHTML += `
+                    <div style="border:1px solid black; padding:0 15px; width:250px; margin-bottom:15px; display:inline-block;">
+                        <h4>${product.title}</h4>
+                        <p>Цена: ${product.price} ₽</p>
+                    </div>`
+                })
+            }
         })
     </script>
 
