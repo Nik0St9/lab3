@@ -14,6 +14,10 @@
     <h2>Список пользователей</h2>
     <div id="users"></div>
 
+    <hr>
+    <h2>Деструктуризация объекта</h2>
+    <div id="destruct"></div>
+
     <script>
         const users = [
             {
@@ -45,7 +49,6 @@
             email: "alex@example.com",
             role: "student"
         }
-
         const product = {
             title: "Ноутбук",
             price: 70000,
@@ -66,8 +69,7 @@
                 <p><b>Возраст:</b> ${user.age}</p>
                 <p><b>Email:</b> ${user.email}</p>
                 <p><b>Роль:</b> ${user.role}</p>
-            </div>
-        `
+            </div>`
 
         productCard.innerHTML = `
             <div style="border:1px solid black; padding:0 15px; width:300px;">
@@ -80,20 +82,30 @@
                     <li>Оперативная память: ${product.specs.ram}</li>
                     <li>Накопитель: ${product.specs.storage}</li>
                 </ul>
-            </div>
-        `
+            </div>`
+
         const usersBlock = document.getElementById("users")
 
-        users.forEach(user => { usersBlock.innerHTML += `
-        <div style="border:1px solid black; padding:0 15px; width:250px; margin-bottom:15px; display:inline-block">
-            <h3>${user.name}</h3>
-            <p><b>ID:</b> ${user.id}</p>
-            <p><b>Email:</b> ${user.email}</p>
-            <p><b>Роль:</b> ${user.role}</p>
-            <p><b>Статус:</b> ${user.active ? "Активен" : "Неактивен"}</p>
-        </div>
-    `
+        users.forEach(user => {
+            usersBlock.innerHTML += `
+            <div style="border:1px solid black; padding:0 15px; width:250px; margin-bottom:15px; display:inline-block">
+                <h3>${user.name}</h3>
+                <p><b>ID:</b> ${user.id}</p>
+                <p><b>Email:</b> ${user.email}</p>
+                <p><b>Роль:</b> ${user.role}</p>
+                <p><b>Статус:</b> ${user.active ? "Активен" : "Неактивен"}</p>
+            </div>`
         })
+
+        const { name, email, role } = user
+        const destruct = document.getElementById("destruct")
+
+        destruct.innerHTML = `
+        <div style="border:1px solid black; padding:0 15px; width:250px;">
+            <h3>${name}</h3>
+            <p><b>Email:</b> ${email}</p>
+            <p><b>Роль:</b> ${role}</p>
+        </div>`
     </script>
 
 </body>
