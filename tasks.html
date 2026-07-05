@@ -5,11 +5,39 @@
 
     <h2>Профиль пользователя</h2>
     <div id="profile"></div>
+
     <hr>
     <h2>Карточка товара</h2>
     <div id="productCard"></div>
 
+    <hr>
+    <h2>Список пользователей</h2>
+    <div id="users"></div>
+
     <script>
+        const users = [
+            {
+                id: 1,
+                name: "Алексей",
+                email: "alex@example.com",
+                role: "student",
+                active: true
+            },
+            {
+                id: 2,
+                name: "Мария",
+                email: "maria@example.com",
+                role: "teacher",
+                active: false
+            },
+            {
+                id: 3,
+                name: "Иван",
+                email: "ivan@example.com",
+                role: "admin",
+                active: true
+            }
+        ]
         const user = {
             id: 1,
             name: "Алексей",
@@ -54,6 +82,18 @@
                 </ul>
             </div>
         `
+        const usersBlock = document.getElementById("users")
+
+        users.forEach(user => { usersBlock.innerHTML += `
+        <div style="border:1px solid black; padding:0 15px; width:250px; margin-bottom:15px; display:inline-block">
+            <h3>${user.name}</h3>
+            <p><b>ID:</b> ${user.id}</p>
+            <p><b>Email:</b> ${user.email}</p>
+            <p><b>Роль:</b> ${user.role}</p>
+            <p><b>Статус:</b> ${user.active ? "Активен" : "Неактивен"}</p>
+        </div>
+    `
+        })
     </script>
 
 </body>
