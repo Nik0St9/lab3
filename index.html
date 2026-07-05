@@ -10,6 +10,10 @@
     <h2>Каталог по категориям</h2>
     <div id="catalog"></div>
 
+    <hr>
+    <h2>Списки пользователей</h2>
+    <div id="usersInfo"></div>
+
     <script>
         const products = [
             { title: "Мышь", price: 1000, category: "Периферия" },
@@ -19,6 +23,36 @@
             "Периферия",
             "Техника",
             "Игры"
+        ]
+        const users = [
+            {
+                id: 1,
+                name: "Алексей",
+                email: "alex@example.com",
+                role: "student",
+                active: true
+            },
+            {
+                id: 2,
+                name: "Мария",
+                email: "maria@example.com",
+                role: "admin",
+                active: false
+            },
+            {
+                id: 3,
+                name: "Иван",
+                email: "ivan@example.com",
+                role: "admin",
+                active: true
+            },
+            {
+                id: 4,
+                name: "Ольга",
+                email: "olga@example.com",
+                role: "student",
+                active: false
+            }
         ]
 
         const newProducts = products.map(product => ({
@@ -55,13 +89,38 @@
             } else {
                 categoryProducts.forEach(product => {
                     catalog.innerHTML += `
-                    <div style="border:1px solid black; padding:0 15px; width:250px; margin-bottom:15px; display:inline-block;">
-                        <h4>${product.title}</h4>
-                        <p>Цена: ${product.price} ₽</p>
-                    </div>`
+                        <div style="border:1px solid black; padding:0 15px; width:250px; margin-bottom:15px; display:inline-block;">
+                            <h4>${product.title}</h4>
+                            <p>Цена: ${product.price} ₽</p>
+                        </div>`
                 })
             }
         })
+
+        const activeUsers = users.filter(user => user.active)
+        const admins = users.filter(user => user.role === "admin")
+        const emails = users.map(user => user.email)
+        const inactiveCount = users.filter(user => !user.active).length
+
+        const usersInfo = document.getElementById("usersInfo")
+
+        usersInfo.innerHTML = `
+            <h3>Активные пользователи</h3>
+            <ul>
+                ${activeUsers.map(user => `<li>${user.name}</li>`).join("")}
+            </ul>
+
+            <h3>Администраторы</h3>
+            <ul>
+                ${admins.map(user => `<li>${user.name}</li>`).join("")}
+            </ul>
+
+            <h3>Email-адреса</h3>
+            <ul>
+                ${emails.map(email => `<li>${email}</li>`).join("")}
+            </ul>
+
+            <h3>Количество неактивных пользователей: ${inactiveCount}</h3>`
     </script>
 
 </body>
