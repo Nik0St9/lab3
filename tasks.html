@@ -4,8 +4,10 @@
 <body>
 
     <h2>Профиль пользователя</h2>
-
     <div id="profile"></div>
+    <hr>
+    <h2>Карточка товара</h2>
+    <div id="productCard"></div>
 
     <script>
         const user = {
@@ -16,17 +18,42 @@
             role: "student"
         }
 
+        const product = {
+            title: "Ноутбук",
+            price: 70000,
+            specs: {
+                cpu: "Intel Core i5",
+                ram: "16 GB",
+                storage: "512 GB SSD"
+            }
+        }
+
         const profile = document.getElementById("profile")
+        const productCard = document.getElementById("productCard")
 
         profile.innerHTML = `
-            <div style="border:1px solid black; padding:0 15px; width:250px;">
+            <div style="border:1px solid black; padding:0 15px; width:250px; margin-bottom:20px;">
                 <h3>${user.name}</h3>
                 <p><b>ID:</b> ${user.id}</p>
                 <p><b>Возраст:</b> ${user.age}</p>
                 <p><b>Email:</b> ${user.email}</p>
                 <p><b>Роль:</b> ${user.role}</p>
-            </div>`
+            </div>
+        `
 
+        productCard.innerHTML = `
+            <div style="border:1px solid black; padding:0 15px; width:300px;">
+                <h3>${product.title}</h3>
+                <p><b>Цена:</b> ${product.price} ₽</p>
+
+                <h4>Характеристики:</h4>
+                <ul>
+                    <li>Процессор: ${product.specs.cpu}</li>
+                    <li>Оперативная память: ${product.specs.ram}</li>
+                    <li>Накопитель: ${product.specs.storage}</li>
+                </ul>
+            </div>
+        `
     </script>
 
 </body>
