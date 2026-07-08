@@ -123,3 +123,56 @@ overlay.addEventListener("click", () => {
 modal.addEventListener("click", (event) => {
     event.stopPropagation()
 })
+
+
+const users = [
+    {
+        name: "Алексей",
+        email: "alex@example.com",
+        role: "Студент"
+    },
+    {
+        name: "Мария",
+        email: "maria@example.com",
+        role: "Администратор"
+    },
+    {
+        name: "Иван",
+        email: "ivan@example.com",
+        role: "Преподаватель"
+    },
+    {
+        name: "Ольга",
+        email: "olga@example.com",
+        role: "Студент"
+    }
+]
+
+const usersTable = document.querySelector("#usersTable")
+
+function renderUsers() {
+
+    usersTable.innerHTML = ""
+
+    users.forEach(user => {
+        const tr = document.createElement("tr")
+
+        const name = document.createElement("td")
+        name.textContent = user.name
+
+        const email = document.createElement("td")
+        email.textContent = user.email
+
+        const role = document.createElement("td")
+        role.textContent = user.role
+
+        tr.append(name)
+        tr.append(email)
+        tr.append(role)
+
+        usersTable.append(tr)
+    })
+
+}
+
+renderUsers()
