@@ -39,7 +39,7 @@ addButton.addEventListener("click", () => {
     deleteButton.textContent = "Удалить"
     deleteButton.classList.add("deleteButton")
 
-    deleteButton.addEventListener("click", function () {
+    deleteButton.addEventListener("click", () => {
         li.remove()
     })
 
@@ -102,3 +102,24 @@ function renderCatalog() {
     })
 }
 renderCatalog()
+
+const openModalButton = document.querySelector("#openModal")
+const closeModalButton = document.querySelector("#closeModal")
+const overlay = document.querySelector(".overlay")
+const modal = document.querySelector(".modal")
+
+openModalButton.addEventListener("click", () => {
+    overlay.classList.add("active")
+})
+
+closeModalButton.addEventListener("click", () => {
+    overlay.classList.remove("active")
+})
+
+overlay.addEventListener("click", () => {
+    overlay.classList.remove("active")
+})
+
+modal.addEventListener("click", (event) => {
+    event.stopPropagation()
+})
