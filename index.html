@@ -2,7 +2,6 @@
 <html>
 
 <body>
-
     <h2>Подготовленные товары</h2>
     <div id="products"></div>
 
@@ -13,6 +12,21 @@
     <hr>
     <h2>Списки пользователей</h2>
     <div id="usersInfo"></div>
+
+    <hr>
+    <h2>Список заказов</h2>
+    <table border="1" cellpadding="10" cellspacing="0">
+        <thead>
+            <tr>
+                <th>№ заказа</th>
+                <th>Клиент</th>
+                <th>Количество товаров</th>
+                <th>Итоговая сумма</th>
+                <th>Статус</th>
+            </tr>
+        </thead>
+        <tbody id="ordersTable"></tbody>
+    </table>
 
     <script>
         const products = [
@@ -52,6 +66,35 @@
                 email: "olga@example.com",
                 role: "student",
                 active: false
+            }
+        ]
+        const orders = [
+            {
+                id: 101,
+                client: "Алексей",
+                status: "Новый",
+                products: [
+                    { title: "Мышь", price: 1000, quantity: 2 },
+                    { title: "Клавиатура", price: 3000, quantity: 1 }
+                ]
+            },
+            {
+                id: 102,
+                client: "Мария",
+                status: "Оплачен",
+                products: [
+                    { title: "Монитор", price: 15000, quantity: 1 },
+                    { title: "Коврик", price: 500, quantity: 2 }
+                ]
+            },
+            {
+                id: 103,
+                client: "Иван",
+                status: "Доставлен",
+                products: [
+                    { title: "Ноутбук", price: 65000, quantity: 1 },
+                    { title: "Мышь", price: 1000, quantity: 1 }
+                ]
             }
         ]
 
@@ -121,6 +164,28 @@
             </ul>
 
             <h3>Количество неактивных пользователей: ${inactiveCount}</h3>`
+
+        const ordersTable = document.getElementById("ordersTable")
+
+        orders.forEach(order => {
+
+            const totalQuantity = order.products.reduce((sum, product) => {
+                return sum + product.quantity
+            }, 0)
+
+            const totalPrice = order.products.reduce((sum, product) => {
+                return sum + product.price * product.quantity
+            }, 0)
+
+            ordersTable.innerHTML += `
+                <tr>
+                    <td>${order.id}</td>
+                    <td>${order.client}</td>
+                    <td>${totalQuantity}</td>
+                    <td>${totalPrice} ₽</td>
+                    <td>${order.status}</td>
+                </tr>`
+        })
     </script>
 
 </body>
