@@ -2,7 +2,7 @@
     width: 250px;
     padding: 20px;
     margin: 10px 20px;
-    
+
     border: 2px solid black;
     background-color: white;
     transition: 0.3s;
@@ -11,4 +11,17 @@
 .active {
     background-color: lightgreen;
     border-color: green;
+}
+
+#catalog {
+    margin-top: 20px;
+}
+
+.product-card {
+    width: 220px;
+    padding: 15px;
+    margin: 10px;
+    
+    border: 1px solid black;
+    display: inline-block;
 }

@@ -49,3 +49,56 @@ addButton.addEventListener("click", () => {
 
     taskInput.value = ""
 })
+
+
+const products = [
+    {
+        title: "Мышь",
+        price: 1000,
+        category: "Периферия"
+    },
+    {
+        title: "Клавиатура",
+        price: 3000,
+        category: "Периферия"
+    },
+    {
+        title: "Монитор",
+        price: 15000,
+        category: "Техника"
+    },
+    {
+        title: "Ноутбук",
+        price: 65000,
+        category: "Техника"
+    }
+]
+
+const catalog = document.querySelector("#catalog")
+
+function renderCatalog() {
+
+    catalog.innerHTML = ""
+
+    products.forEach(product => {
+
+        const card = document.createElement("div")
+        card.classList.add("product-card")
+
+        const title = document.createElement("h3")
+        title.textContent = product.title
+
+        const price = document.createElement("p")
+        price.textContent = `Цена: ${product.price} ₽`
+
+        const category = document.createElement("p")
+        category.textContent = `Категория: ${product.category}`
+
+        card.append(title)
+        card.append(price)
+        card.append(category)
+
+        catalog.append(card)
+    })
+}
+renderCatalog()
