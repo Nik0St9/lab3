@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h1>Исходный заголовок</h1>
+
+    <button id="changeButton">Изменить текст</button>
+
+    <script>
+        const button = document.querySelector("#changeButton")
+
+        button.addEventListener("click", function () {
+
+            const heading = document.querySelector("h1")
+
+            if (heading) {
+                heading.textContent = "Текст заголовка изменён"
+            }
+
+        })
+    </script>
+
+</body>
+
+</html>
