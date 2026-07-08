@@ -2,50 +2,93 @@
 <html>
 
 <body>
+    <h2>Каталог товаров</h2>
 
-    <h2>Список товаров</h2>
+    <input type="text" id="search" placeholder="Поиск товара">
 
-    <button id="originalBtn">Исходный список</button>
-    <button id="ascBtn">По возрастанию цены</button>
-    <button id="descBtn">По убыванию цены</button>
+    <select id="category">
+        <option value="Все">Все категории</option>
+        <option value="Периферия">Периферия</option>
+        <option value="Техника">Техника</option>
+    </select>
 
-    <ul id="productList"></ul>
+    <select id="sort">
+        <option value="default">Без сортировки</option>
+        <option value="asc">Сначала дешевле</option>
+        <option value="desc">Сначала дороже</option>
+    </select>
+
+    <hr>
+    <div id="catalog"></div>
 
     <script>
         const products = [
-            { title: "Мышь", price: 1000 },
-            { title: "Клавиатура", price: 3000 },
-            { title: "Монитор", price: 15000 },
-            { title: "Наушники", price: 5000 }
+            { title: "Мышь", price: 1000, category: "Периферия" },
+            { title: "Клавиатура", price: 3000, category: "Периферия" },
+            { title: "Монитор", price: 15000, category: "Техника" },
+            { title: "Ноутбук", price: 65000, category: "Техника" }
         ]
 
-        const productList = document.getElementById("productList")
+        const searchInput = document.getElementById("search")
+        const categorySelect = document.getElementById("category")
+        const sortSelect = document.getElementById("sort")
+        const catalog = document.getElementById("catalog")
 
-        function renderProducts(arr) {
-            productList.innerHTML = ""
+        function filterProducts(products, search, category) {
+            return products.filter(product => {
+                const matchSearch = product.title.toLowerCase().includes(search.toLowerCase())
 
-            arr.forEach(product => {
-                const li = document.createElement("li")
-                li.textContent = `${product.title} — ${product.price}₽`
-                productList.appendChild(li)
+                const matchCategory = category === "Все" || product.category === category
+
+                return matchSearch && matchCategory
             })
         }
 
-        document.getElementById("originalBtn").addEventListener("click", () => {
-            renderProducts(products)
-        })
+        function sortProducts(products, sortType) {
 
-        document.getElementById("ascBtn").addEventListener("click", () => {
-            const sorted = [...products].sort((a, b) => a.price - b.price)
-            renderProducts(sorted)
-        })
+            const sortedProducts = [...products]
 
-        document.getElementById("descBtn").addEventListener("click", () => {
-            const sorted = [...products].sort((a, b) => b.price - a.price)
-            renderProducts(sorted)
-        })
+            if (sortType === "asc") {
+                sortedProducts.sort((a, b) => a.price - b.price)
+            }
 
-        renderProducts(products)
+            if (sortType === "desc") {
+                sortedProducts.sort((a, b) => b.price - a.price)
+            }
+
+            return sortedProducts
+        }
+
+        // Вывод товаров
+        function renderProducts() {
+
+            const filtered = filterProducts(products, searchInput.value, categorySelect.value)
+
+            const sorted = sortProducts(filtered, sortSelect.value)
+
+            catalog.innerHTML = ""
+
+            if (sorted.length === 0) {
+                catalog.innerHTML = "<p>Товары не найдены.</p>"
+                return
+            }
+
+            sorted.forEach(product => {
+                catalog.innerHTML += `
+                    <div style="border:1px solid black; width:250px; padding:15px; margin:10px; display:inline-block;">
+                        <h3>${product.title}</h3>
+                        <p>Цена: ${product.price} ₽</p>
+                        <p>Категория: ${product.category}</p>
+                    </div>`
+            })
+        }
+
+        searchInput.addEventListener("input", renderProducts)
+        categorySelect.addEventListener("change", renderProducts)
+        sortSelect.addEventListener("change", renderProducts)
+
+        renderProducts()
+
     </script>
 
 </body>
