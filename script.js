@@ -1,6 +1,6 @@
 const button = document.querySelector("#changeButton")
 
-button.addEventListener("click", function () {
+button.addEventListener("click", () => {
     const heading = document.querySelector("h1")
 
     if (heading) {
@@ -11,8 +11,30 @@ button.addEventListener("click", function () {
 const card = document.querySelector(".card")
 const toggleButton = document.querySelector("#toggleButton")
 
-toggleButton.addEventListener("click", function () {
+toggleButton.addEventListener("click", () => {
     if (card) {
         card.classList.toggle("active")
     }
+})
+
+
+const taskInput = document.querySelector("#taskInput")
+const addButton = document.querySelector("#addButton")
+const taskList = document.querySelector("#taskList")
+
+addButton.addEventListener("click", () => {
+
+    const text = taskInput.value.trim()
+
+    if (text === "") {
+        return
+    }
+
+    const li = document.createElement("li")
+
+    li.textContent = text
+
+    taskList.append(li)
+
+    taskInput.value = ""
 })
