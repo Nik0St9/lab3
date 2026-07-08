@@ -1,26 +1,24 @@
 <!DOCTYPE html>
 <html>
 
-<body>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
 
+<body>
     <h1>Исходный заголовок</h1>
 
     <button id="changeButton">Изменить текст</button>
 
-    <script>
-        const button = document.querySelector("#changeButton")
+    <hr>
 
-        button.addEventListener("click", function () {
+    <div class="card">
+        <h2>Карточка товара</h2>
+        <p>Это обычная карточка.</p>
+    </div>
 
-            const heading = document.querySelector("h1")
-
-            if (heading) {
-                heading.textContent = "Текст заголовка изменён"
-            }
-
-        })
-    </script>
-
+    <button id="toggleButton">Переключить состояние</button>
 </body>
 
 </html>
