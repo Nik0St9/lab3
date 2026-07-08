@@ -34,53 +34,62 @@
         const sortSelect = document.getElementById("sort")
         const catalog = document.getElementById("catalog")
 
-        function filterProducts(products, search, category) {
-            return products.filter(product => {
-                const matchSearch = product.title.toLowerCase().includes(search.toLowerCase())
+        function filterByCategory(products, category) {
 
-                const matchCategory = category === "Все" || product.category === category
+            if (category === "Все") {
+                return [...products]
+            }
 
-                return matchSearch && matchCategory
-            })
+            return products.filter(product => product.category === category)
         }
 
-        function sortProducts(products, sortType) {
+        function searchProducts(products, query) {
+
+            return products.filter(product =>
+                product.title.toLowerCase().includes(query.toLowerCase())
+            )
+        }
+
+        function sortByPrice(products, direction) {
 
             const sortedProducts = [...products]
 
-            if (sortType === "asc") {
+            if (direction === "asc") {
                 sortedProducts.sort((a, b) => a.price - b.price)
             }
 
-            if (sortType === "desc") {
+            if (direction === "desc") {
                 sortedProducts.sort((a, b) => b.price - a.price)
             }
 
             return sortedProducts
         }
 
-        // Вывод товаров
+        function formatProducts(products) {
+
+            return products.map(product => `
+                <div style="border:1px solid black width:250px padding:15px margin:10px display:inline-block">
+                    <h3>${product.title}</h3>
+                    <p>Цена: ${product.price} ₽</p>
+                    <p>Категория: ${product.category}</p>
+                </div>`
+            ).join("")
+        }
+
         function renderProducts() {
 
-            const filtered = filterProducts(products, searchInput.value, categorySelect.value)
+            let result = filterByCategory(products, categorySelect.value)
 
-            const sorted = sortProducts(filtered, sortSelect.value)
+            result = searchProducts(result, searchInput.value)
 
-            catalog.innerHTML = ""
+            result = sortByPrice(result, sortSelect.value)
 
-            if (sorted.length === 0) {
+            if (result.length === 0) {
                 catalog.innerHTML = "<p>Товары не найдены.</p>"
                 return
             }
 
-            sorted.forEach(product => {
-                catalog.innerHTML += `
-                    <div style="border:1px solid black; width:250px; padding:15px; margin:10px; display:inline-block;">
-                        <h3>${product.title}</h3>
-                        <p>Цена: ${product.price} ₽</p>
-                        <p>Категория: ${product.category}</p>
-                    </div>`
-            })
+            catalog.innerHTML = formatProducts(result)
         }
 
         searchInput.addEventListener("input", renderProducts)
