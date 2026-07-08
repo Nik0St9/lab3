@@ -34,6 +34,17 @@ addButton.addEventListener("click", () => {
 
     li.textContent = text
 
+    const deleteButton = document.createElement("button")
+
+    deleteButton.textContent = "Удалить"
+    deleteButton.classList.add("deleteButton")
+
+    deleteButton.addEventListener("click", function () {
+        li.remove()
+    })
+
+    li.append(deleteButton)
+
     taskList.append(li)
 
     taskInput.value = ""
