@@ -44,6 +44,48 @@
             }
         })
     </Script>
+
+    <hr>
+    <h2>Форма регистрации</h2>
+    <form id="registerForm">
+        <input type="text" id="name" placeholder="Введите имя">
+
+        <br><br>
+        <input type="email" id="email" placeholder="Введите email">
+
+        <br><br>
+        <button type="submit">Зарегистрироваться</button>
+    </form>
+
+    <p id="errors"></p>
+    <div id="result"></div>
+    <Script>
+        const registerForm = document.querySelector("#registerForm")
+        const nameInput = document.querySelector("#name")
+        const emailInput = document.querySelector("#email")
+        const errors = document.querySelector("#errors")
+        const result = document.querySelector("#result")
+
+        registerForm.addEventListener("submit", (event) => {
+            event.preventDefault()
+
+            errors.textContent = ""
+            result.innerHTML = ""
+
+            const name = nameInput.value.trim()
+            const email = emailInput.value.trim()
+
+            if (name === "" || email === "") {
+                errors.textContent = "Заполните все поля!"
+                return
+            }
+
+            result.innerHTML = `
+                <h3>Данные пользователя:</h3>
+                <p>Имя: ${name}</p>
+                <p>Email: ${email}</p>`
+        })
+    </Script>
 </body>
 
 </html>
