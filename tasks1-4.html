@@ -23,6 +23,27 @@
             counter.textContent = count
         })
     </script>
+
+    <hr>
+    <h2>Live input</h2>
+    <input type="text" id="liveInput" placeholder="Введите текст">
+
+    <p id="output">Здесь появится текст</p>
+    <Script>
+        const liveInput = document.querySelector("#liveInput")
+        const output = document.querySelector("#output")
+
+        liveInput.addEventListener("input", () => {
+
+            const text = liveInput.value.trim()
+
+            if (text === "") {
+                output.textContent = "Здесь появится текст"
+            } else {
+                output.textContent = text
+            }
+        })
+    </Script>
 </body>
 
 </html>
