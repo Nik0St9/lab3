@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h2>Каталог товаров</h2>
+
+    <div id="products"></div>
+    <p id="cartMessage"></p>
+    <script>
+        const products = [
+            {
+                id: 1,
+                title: "Мышь",
+                price: 1000
+            },
+            {
+                id: 2,
+                title: "Клавиатура",
+                price: 3000
+            },
+            {
+                id: 3,
+                title: "Монитор",
+                price: 15000
+            }
+        ]
+
+        const productsContainer = document.querySelector("#products")
+        const cartMessage = document.querySelector("#cartMessage")
+
+        function renderProducts() {
+            productsContainer.innerHTML = ""
+
+            products.forEach((product) => {
+                const card = document.createElement("div")
+                card.classList.add("product")
+                card.dataset.id = product.id
+
+                card.innerHTML = `
+                    <h3>${product.title}</h3>
+                    <p>${product.price}₽</p>
+
+                    <button class="cartButton">
+                        В корзину
+                    </button>
+
+                    <button class="deleteButton">
+                        Удалить
+                    </button>`
+                productsContainer.append(card)
+            })
+        }
+
+        renderProducts()
+
+        productsContainer.addEventListener("click", (event) => {
+            const card = event.target.closest(".product")
+
+            if (!card) { return }
+
+            const id = Number(card.dataset.id)
+
+            const product = products.find((item) => {
+                return item.id === id
+            })
+
+            if (event.target.classList.contains("deleteButton")) {
+                const index = products.indexOf(product)
+
+                products.splice(index, 1)
+
+                renderProducts()
+            }
+
+            if (event.target.classList.contains("cartButton")) {
+                cartMessage.innerHTML = `<i>Товар "${product.title}" добавлен в корзину<i>`
+            }
+        })
+    </script>
+</body>
+
+</html>
