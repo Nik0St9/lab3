@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1>Кнопка счётчика</h1>
+    <p>
+        Значение: <span id="counter">0</span>
+    </p>
+
+    <button id="counterButton">Увеличить</button>
+    <script>
+        let count = 0
+        const counter = document.querySelector("#counter")
+        const counterButton = document.querySelector("#counterButton")
+
+        counterButton.addEventListener("click", () => {
+            count++
+            counter.textContent = count
+        })
+    </script>
+</body>
+
+</html>
