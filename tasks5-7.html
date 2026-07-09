@@ -22,6 +22,12 @@
         <option value="desc">Сначала дороже</option>
     </select>
 
+    <hr>
+    <h2>Корзина</h2>
+
+    <div id="cart"></div>
+    <h3 id="totalPrice">Общая сумма: 0₽</h3>
+
     <script>
         const products = [
             {
@@ -43,15 +49,17 @@
                 category: "Техника"
             }
         ]
+        const cart = []
 
         const productsContainer = document.querySelector("#products")
         const cartMessage = document.querySelector("#cartMessage")
         const search = document.querySelector("#search")
         const category = document.querySelector("#category")
         const sort = document.querySelector("#sort")
+        const cartContainer = document.querySelector("#cart")
+        const totalPrice = document.querySelector("#totalPrice")
 
         function renderProducts() {
-
             productsContainer.innerHTML = ""
 
             let result = [...products]
@@ -99,11 +107,40 @@
             })
         }
         renderProducts()
+
         search.addEventListener("input", renderProducts)
-
         category.addEventListener("change", renderProducts)
-
         sort.addEventListener("change", renderProducts)
+
+        function renderCart() {
+            cartContainer.innerHTML = ""
+
+            let total = 0
+
+            cart.forEach(item => {
+                total += item.price * item.count
+
+                const card = document.createElement("div")
+
+                card.dataset.id = item.id
+
+                card.innerHTML = `
+                    <h4>${item.title}</h4>
+
+                    <p>Цена: ${item.price} ₽</p>
+
+                    <p>Количество: ${item.count}</p>
+
+                    <button class="removeCart">
+                        Удалить
+                    </button>`
+
+                cartContainer.append(card)
+            })
+
+            totalPrice.textContent = `Общая сумма: ${total}₽`
+
+        }
 
         productsContainer.addEventListener("click", (event) => {
             const card = event.target.closest(".product")
@@ -125,7 +162,36 @@
             }
 
             if (event.target.classList.contains("cartButton")) {
-                cartMessage.innerHTML = `<i>Товар "${product.title}" добавлен в корзину<i>`
+                const cartProduct = cart.find(item => item.id === product.id)
+
+                if (cartProduct) {
+                    cartProduct.count++
+                } else {
+                    cart.push({
+                        id: product.id,
+                        title: product.title,
+                        price: product.price,
+                        count: 1
+                    })
+                }
+
+                cartMessage.innerHTML = `<i>Товар "${product.title}" добавлен в корзину</i>`
+                renderCart()
+            }
+        })
+
+        cartContainer.addEventListener("click", event => {
+            if (!event.target.classList.contains("removeCart")) { return }
+
+            const card = event.target.closest("div")
+
+            const id = Number(card.dataset.id)
+
+            const index = cart.findIndex(item => item.id === id)
+
+            if (index !== -1) {
+                cart.splice(index, 1)
+                renderCart()
             }
         })
     </script>
